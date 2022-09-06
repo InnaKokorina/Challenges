@@ -311,44 +311,44 @@ import UIKit
 //--------------------------------------
 // 1. Interview Practice FirstDuplicates
 
-func firstDuplicates(a: [Int]) -> Int {
-    var dict = [Int:Int]()
-    for element in a {
-        if let count = dict[element], count + 1 > 0 {
-            return element
-        } else {
-            dict[element] = 0
-        }
-    }
-   return -1
-}
-firstDuplicates(a:[2, 1, 3, 5, 3, 2])
+//func firstDuplicates(a: [Int]) -> Int {
+//    var dict = [Int:Int]()
+//    for element in a {
+//        if let count = dict[element], count + 1 > 0 {
+//            return element
+//        } else {
+//            dict[element] = 0
+//        }
+//    }
+//   return -1
+//}
+//firstDuplicates(a:[2, 1, 3, 5, 3, 2])
 
 //--------------------------------------
 //2.Interview Practice firstNotRepeatingCharacter
 
-func solution(s: String) -> Character {
-    let array = s.map { String($0)  }
-    let set = Set(array)
-    var result: Character = "_"
-    var index = array.count - 1
-    for el in set {
-        if  array.filter { $0 == el } .count == 1 {
-
-            if let arrayIndex = array.firstIndex(of: el) {
-
-                if index == array.count - 1 {
-                    index = arrayIndex
-                } else if arrayIndex < index {
-                    index = arrayIndex
-                }
-                result = Character(array[index])
-            }
-        }
-
-    }
-    return result
-}
+//func solution(s: String) -> Character {
+//    let array = s.map { String($0)  }
+//    let set = Set(array)
+//    var result: Character = "_"
+//    var index = array.count - 1
+//    for el in set {
+//        if  array.filter { $0 == el } .count == 1 {
+//
+//            if let arrayIndex = array.firstIndex(of: el) {
+//
+//                if index == array.count - 1 {
+//                    index = arrayIndex
+//                } else if arrayIndex < index {
+//                    index = arrayIndex
+//                }
+//                result = Character(array[index])
+//            }
+//        }
+//
+//    }
+//    return result
+//}
 
 // более верное решение
 
@@ -359,5 +359,48 @@ func solution(s: String) -> Character {
 //    }
 //    return "_"
 //}
-solution(s: "abacabafabacaba")
+//solution(s: "abacabafabacaba")
+//
+// 3.Interview Practice rotateImage
+//You are given an n x n 2D matrix that represents an image. Rotate the image by 90 degrees (clockwise).
+// первое решение O(15)
+func solution(a: [[Int]]) -> [[Int]] {
+    let n = a.flatMap { $0 }
+    let inputCount = a[0].count
+    var outputArray = [[Int]]()
+
+    for i in 0...inputCount - 1 {
+        var inoutArray =  [Int]()
+        for j in 0...inputCount-1 where i + j*inputCount <  n.count{
+            inoutArray.append(n[i + j*inputCount])
+        }
+        outputArray.append(inoutArray.reversed())
+    }
+   return outputArray
+}
+// второе решениие O(12)
+func solutionSecond(a: [[Int]]) -> [[Int]] {
+    var new = a
+    for i in 0..<a.count {
+        for j in 0..<a[i].count {
+            new[j][i] = a[i][j]
+        }
+    }
+    for i in 0..<new.count {
+        new[i] = new[i].reversed()
+    }
+   return new
+}
+
+solution(a: [[1, 2, 3],
+             [4, 5, 6],
+             [7, 8, 9]])
+
+solutionSecond(a: [[1, 2, 3],
+                   [4, 5, 6],
+                   [7, 8, 9]])
+//solution(a) =
+//    [[7, 4, 1],
+//     [8, 5, 2],
+//     [9, 6, 3]]
 
