@@ -405,49 +405,68 @@ import UIKit
 //     [9, 6, 3]]
 // ---------------------------------------
 
-//4.Arcade alternatingSums
+//14.Arcade alternatingSums
 //Several people are standing in a row and need to be divided into two teams. The first person goes into team 1, the second goes into team 2, the third goes into team 1 again, the fourth into team 2, and so on.
 //
 //You are given an array of positive integers - the weights of the people. Return an array of two integers, where the first element is the total weight of team 1, and the second element is the total weight of team 2 after the division is complete.
 
 
 // первое решение
-func solution(a: [Int]) -> [Int] {
-    var firstArray = [Int]()
-    var secondArray = [Int]()
-    for i in 0..<a.count {
-        if i % 2 == 0 {
-            firstArray.append(a[i])
-        } else {
-            secondArray.append(a[i])
-        }
-    }
-    return [firstArray.reduce(0, +), secondArray.reduce(0, +)]
-}
+//func solution(a: [Int]) -> [Int] {
+//    var firstArray = [Int]()
+//    var secondArray = [Int]()
+//    for i in 0..<a.count {
+//        if i % 2 == 0 {
+//            firstArray.append(a[i])
+//        } else {
+//            secondArray.append(a[i])
+//        }
+//    }
+//    return [firstArray.reduce(0, +), secondArray.reduce(0, +)]
+//}
 // второе более красивое решение
-func solutionsSecond(a: [Int]) -> [Int] {
-    let firstArray = a.enumerated().filter { $0.0 % 2 == 0 }.map{ $0.1 }
-    let secondArray = a.enumerated().filter { $0.0 % 2 != 0 }.map{ $0.1 }
-    return [firstArray.reduce(0, +), secondArray.reduce(0, +)]
-}
+//func solutionsSecond(a: [Int]) -> [Int] {
+//    let firstArray = a.enumerated().filter { $0.0 % 2 == 0 }.map{ $0.1 }
+//    let secondArray = a.enumerated().filter { $0.0 % 2 != 0 }.map{ $0.1 }
+//    return [firstArray.reduce(0, +), secondArray.reduce(0, +)]
+//}
 //третье более быстрое решение O(N)
 
-func solutionThird(a: [Int]) -> [Int] {
-    var result = [0,0]
-    for i in 0..<a.count {
-        if i % 2 == 0 {
-            result[0] += a[i]
-        } else {
-            result[1] += a[i]
-        }
-    }
-    return result
-}
-
-
-let a = [50, 60, 60, 45, 70]
-solution(a: a)
-solutionsSecond(a: a)
-solutionThird(a: a)
+//func solutionThird(a: [Int]) -> [Int] {
+//    var result = [0,0]
+//    for i in 0..<a.count {
+//        if i % 2 == 0 {
+//            result[0] += a[i]
+//        } else {
+//            result[1] += a[i]
+//        }
+//    }
+//    return result
+//}
+//
+//
+//let a = [50, 60, 60, 45, 70]
+//solution(a: a)
+//solutionsSecond(a: a)
+//solutionThird(a: a)
 
 //= [180, 105]
+//-------------------------------
+//15.Arcade Add a border. Given a rectangular matrix of characters, add a border of asterisks(*) to it.
+
+func solution(picture: [String]) -> [String] {
+    
+    let  firstString = String(repeatElement("*", count: (picture.first?.count ?? -2) + 2))
+    let new = picture.map { "*" + $0 + "*" }
+    
+    return [firstString] +  new + [firstString]
+}
+
+let picture = ["abc",
+               "ded"]
+solution(picture: picture)
+
+// =                    ["*****",
+//                      "*abc*",
+//                      "*ded*",
+//                      "*****"]
