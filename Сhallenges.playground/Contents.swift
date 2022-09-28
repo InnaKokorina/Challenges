@@ -487,7 +487,7 @@ import UIKit
 //
 //
 //solution(array: [1,1,5,7,3,8,4,8])
-
+//-----------------------------------------
 // 16.Arcade Are Similar? Two arrays are called similar if one can be obtained from another by swapping at most one pair of elements in one of the arrays.
 
 //func solution(a: [Int], b: [Int]) -> Bool {
@@ -522,22 +522,46 @@ import UIKit
 
 //[1,3,4,2,5]
 //[1,2,4,3,5]
+//-----------------------------------------
 // 17. arrayChange You are given an array of integers. On each move you are allowed to increase exactly one of its element by one. Find the minimal number of moves required to obtain a strictly increasing sequence from the input.
-func solution(inputArray: [Int]) -> Int {
-    var counter = 0
-    var last = inputArray[0]
-    
-    for i in 0..<inputArray.count - 1 {
-        
-        if inputArray[i + 1] <= last {
-            counter += last - inputArray[i + 1] + 1
-            last += 1
-        } else {
-            last = inputArray[i + 1]
+//func solution(inputArray: [Int]) -> Int {
+//    var counter = 0
+//    var last = inputArray[0]
+//
+//    for i in 0..<inputArray.count - 1 {
+//
+//        if inputArray[i + 1] <= last {
+//            counter += last - inputArray[i + 1] + 1
+//            last += 1
+//        } else {
+//            last = inputArray[i + 1]
+//        }
+//
+//    }
+//    return counter
+//}
+//
+//solution(inputArray: [-1000, 0, -2, 0])
+//-----------------------------------------
+// 18 palindromeRearranging
+//Given a string, find out if its characters can be rearranged to form a palindrome.
+
+func solution(inputString: String) -> Bool {
+    let letterCount = inputString.reduce(into: [:]) { counts, letter in
+        counts[letter, default: 0] += 1}
+    var oddCount = 0
+
+    for (_,value) in letterCount {
+        if value % 2 != 0 {
+            oddCount += 1
         }
-        
     }
-    return counter
+    
+    if oddCount > 1 {
+        return false
+    } else {
+        return true
+    }
 }
 
-solution(inputArray: [-1000, 0, -2, 0])
+solution(inputString: "bacabb")
