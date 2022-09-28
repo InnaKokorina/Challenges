@@ -363,7 +363,9 @@ import UIKit
 //
 // 3.Interview Practice rotateImage
 //You are given an n x n 2D matrix that represents an image. Rotate the image by 90 degrees (clockwise).
-// первое решение O(15)
+
+
+ //первое решение O(15)
 //func solution(a: [[Int]]) -> [[Int]] {
 //    let n = a.flatMap { $0 }
 //    let inputCount = a[0].count
@@ -454,19 +456,88 @@ import UIKit
 //-------------------------------
 //15.Arcade Add a border. Given a rectangular matrix of characters, add a border of asterisks(*) to it.
 
-func solution(picture: [String]) -> [String] {
-    
-    let  firstString = String(repeatElement("*", count: (picture.first?.count ?? -2) + 2))
-    let new = picture.map { "*" + $0 + "*" }
-    
-    return [firstString] +  new + [firstString]
-}
-
-let picture = ["abc",
-               "ded"]
-solution(picture: picture)
+//func solution(picture: [String]) -> [String] {
+//
+//    let  firstString = String(repeatElement("*", count: (picture.first?.count ?? -2) + 2))
+//    let new = picture.map { "*" + $0 + "*" }
+//
+//    return [firstString] +  new + [firstString]
+//}
+//
+//let picture = ["abc",
+//               "ded"]
+//solution(picture: picture)
 
 // =                    ["*****",
 //                      "*abc*",
 //                      "*ded*",
 //                      "*****"]
+
+//func solution(array: [Int]) -> [Int] {
+//    var a = [Int]()
+//
+//    for i in array {
+//        if !a.contains(i) {
+//            a.append(i)
+//        }
+//    }
+//
+//    return Array(a)
+//}
+//
+//
+//solution(array: [1,1,5,7,3,8,4,8])
+
+// 16.Arcade Are Similar? Two arrays are called similar if one can be obtained from another by swapping at most one pair of elements in one of the arrays.
+
+//func solution(a: [Int], b: [Int]) -> Bool {
+//
+//    if a.count != b.count {
+//        return false
+//    }
+//
+//    if a == b  {
+//        return true
+//    }
+//
+//    var twoIndexesArray = [Int]()
+//
+//    for i in 0..<a.count {
+//        if a[i] != b[i] {
+//            twoIndexesArray.append(i)
+//            if twoIndexesArray.count > 2 {
+//                return false
+//            }
+//        }
+//    }
+//
+//    if twoIndexesArray.count == 2 {
+//        if a[twoIndexesArray[0]] == b[twoIndexesArray[1]] && a[twoIndexesArray[1]] == b[twoIndexesArray[0]] {
+//            return true
+//        }
+//    }
+//    return false
+//}
+//solution(a: [1,3,4,2,5], b: [1,7,4,2,5])
+
+//[1,3,4,2,5]
+//[1,2,4,3,5]
+// 17. arrayChange You are given an array of integers. On each move you are allowed to increase exactly one of its element by one. Find the minimal number of moves required to obtain a strictly increasing sequence from the input.
+func solution(inputArray: [Int]) -> Int {
+    var counter = 0
+    var last = inputArray[0]
+    
+    for i in 0..<inputArray.count - 1 {
+        
+        if inputArray[i + 1] <= last {
+            counter += last - inputArray[i + 1] + 1
+            last += 1
+        } else {
+            last = inputArray[i + 1]
+        }
+        
+    }
+    return counter
+}
+
+solution(inputArray: [-1000, 0, -2, 0])
